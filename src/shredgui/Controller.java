@@ -1,4 +1,4 @@
-package sample;
+package shredgui;
 
 public class Controller {
 }
