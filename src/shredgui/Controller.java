@@ -70,6 +70,23 @@ public class Controller {
     }
     //endregion
 
+    @FXML
+    void shredFileBrowseOnAction(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Select files to shred.");
+        File file = chooser.showOpenDialog(new Stage());
+        shredFilePathTextField.setText(file.getAbsolutePath());
+    }
+
+    @FXML
+    void randomDataPathOnAction(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Select files to shred.");
+        File file = chooser.showOpenDialog(new Stage());
+        randomDataPathTextField.setText(file.getAbsolutePath());
+    }
+
     
+
 
 }
