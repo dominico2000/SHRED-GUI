@@ -86,7 +86,25 @@ public class Controller {
         randomDataPathTextField.setText(file.getAbsolutePath());
     }
 
-    
+    @FXML
+    void shredButtonOnAction(ActionEvent event) {
+        logTextArea.clear();
+        String toLogTextArea = new String();
+        String params = new String();
+
+        if( forceCheckBox.isSelected() ) params += "-f ";
+        if( iterationsCheckBox.isSelected() ) params += "--iterations=" + iterationsSpinner.getValue().toString()+" ";
+        if( randomDataSourceCheckBox.isSelected() ) params += "--random-source=" + randomDataPathTextField.getText() + " ";
+        if( shortAndRemoveCheckBox.isSelected() ) params += "-u ";
+        if( removeCheckBox.isSelected() ) params += "--remove=" + removeModeChoiceBox.getSelectionModel().getSelectedItem().toString() + " ";
+        if( exactCheckBox.isSelected() ) params += "-x ";
+        if( zeroCheckBox.isSelected() ) params += "-z ";
+
+        String command = "shred " + params + shredFilePathTextField.getText();
+        logTextArea.setText(command);
+
+
+    }
 
 
 }
