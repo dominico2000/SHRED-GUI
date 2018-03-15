@@ -104,6 +104,7 @@ public class Controller {
         logTextArea.setText(command);
 
 
+
     }
 
 
