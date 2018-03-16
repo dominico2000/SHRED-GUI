@@ -8,20 +8,4 @@ cp ./shred-gui_kdesu /opt/shred-gui
 cp ./shred-gui_gksudo /opt/shred-gui
 cp ./shred-gui.jar /opt/shred-gui
 cp ./shred-gui.png /opt/shred-gui
-
-echo "Choose your graphical root provider:"
-echo "1 gksudo"
-echo "2 kdesu"
-
-read -p "$ " -n 1 input 
-
-rm /usr/bin/shred-gui || :
-
-if [ $input == "1" ]; then
-    ln -s /opt/shred-gui/shred-gui_gksudo /usr/bin/shred-gui
-elif [ $input == "2" ]; then
-    ln -s /opt/shred-gui/shred-gui_kdesu /usr/bin/shred-gui
-else
-    echo "Failed"
-    exit 1
-fi 
+ln -s /opt/shred-gui/shred-gui /usr/bin/shred-gui

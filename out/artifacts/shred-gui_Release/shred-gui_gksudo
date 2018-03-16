@@ -1,2 +1,0 @@
-#!/bin/bash
-gksudo "java -jar /opt/ntfsfix-gui/shred-gui.jar"
