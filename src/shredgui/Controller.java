@@ -102,7 +102,7 @@ public class Controller {
         if( exactCheckBox.isSelected() ) params += "-x ";
         if( zeroCheckBox.isSelected() ) params += "-z ";
 
-        String command = "shred " + params + shredFilePathTextField.getText();
+        String command = "shred -v " + params + shredFilePathTextField.getText();
 
         shredButton.setDisable( true );
         Process ntfsfix = Runtime.getRuntime().exec( command );
