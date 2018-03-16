@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class Controller {
@@ -29,6 +30,7 @@ public class Controller {
     public TextField randomDataPathTextField;
     public Button randomDataPathButton;
     public ChoiceBox removeModeChoiceBox;
+    public Button shredButton;
 
     public TextArea logTextArea;
 
@@ -71,7 +73,7 @@ public class Controller {
     //endregion
 
     @FXML
-    void shredFileBrowseOnAction(ActionEvent event) {
+    void shredFileBrowseOnAction(ActionEvent event) throws IOException {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Select files to shred.");
         File file = chooser.showOpenDialog(new Stage());
@@ -79,7 +81,7 @@ public class Controller {
     }
 
     @FXML
-    void randomDataPathOnAction(ActionEvent event) {
+    void randomDataPathOnAction(ActionEvent event) throws IOException {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Select files to shred.");
         File file = chooser.showOpenDialog(new Stage());
@@ -87,7 +89,7 @@ public class Controller {
     }
 
     @FXML
-    void shredButtonOnAction(ActionEvent event) {
+    void shredButtonOnAction(ActionEvent event) throws IOException {
         logTextArea.clear();
         String toLogTextArea = new String();
         String params = new String();
@@ -101,7 +103,24 @@ public class Controller {
         if( zeroCheckBox.isSelected() ) params += "-z ";
 
         String command = "shred " + params + shredFilePathTextField.getText();
-        logTextArea.setText(command);
+
+        shredButton.setDisable( true );
+        Process ntfsfix = Runtime.getRuntime().exec( command );
+
+        logTextArea.setText("Running " + command + "\n");
+
+        InputStream out = ntfsfix.getInputStream();
+
+        toLogTextArea = logTextArea.getText();
+        int c;
+        while ((c = out.read()) != -1) {
+            toLogTextArea += (char)c;
+            logTextArea.setText(toLogTextArea);
+        }
+        out.close();
+
+        shredButton.setDisable( false );
+
 
 
 
